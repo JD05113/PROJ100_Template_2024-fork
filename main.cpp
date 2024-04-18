@@ -54,14 +54,39 @@ int main ()
     // These contain while(1) loops so ensure that they are removed or commented out when running your own code
     // If these lines are left in the lines below will never run
     /*************************************************/
+ //speed_test();
 
-    // simple_test();
-    speed_test();
 
+
+
+
+   
     while(true){
 
         // Write the parts of your code which should run in a loop between here..
+ // simple_test();
+   /*
+   // go forwarrd for 50 cm
+   Wheel.Speed(0.9f,0.9f);//Forward 80%
+   wait_us(3000000);
 
+   //go reverse for 50 cm
+   Wheel.Speed(-0.9f,-0.9f);//Forward 80%
+   wait_us(3000000);
+   */
+
+    //turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(200000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+
+   Wheel.Speed(0.8f,0.8f);//Forward 80%
+   wait_us(200000);
+
+
+    jingle_bells(2);
 
 
 
