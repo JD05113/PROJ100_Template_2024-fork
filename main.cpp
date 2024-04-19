@@ -58,35 +58,68 @@ int main ()
 
 
 
-
+   //jingle_bells(2);
 
    
     while(true){
 
         // Write the parts of your code which should run in a loop between here..
  // simple_test();
-   /*
+   
    // go forwarrd for 50 cm
-   Wheel.Speed(0.9f,0.9f);//Forward 80%
-   wait_us(3000000);
+   Wheel.Speed(0.8f,0.8f);//Forward 80%
+   wait_us(2500000);
 
    //go reverse for 50 cm
    Wheel.Speed(-0.9f,-0.9f);//Forward 80%
-   wait_us(3000000);
-   */
+   wait_us(2500000);
+   
 
     //turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(200000);
+   wait_us(800000);
 
     //stop wheels for sometime
    Wheel.Stop();
-
+   //go forward
    Wheel.Speed(0.8f,0.8f);//Forward 80%
-   wait_us(200000);
+   wait_us(1000000);
+
+   //turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(1000000);
+
+    Wheel.Stop();
+
+      // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.8f);//Forward 80%
+   wait_us(2500000);
+
+   //go reverse for 50 cm
+   Wheel.Speed(-0.9f,-0.9f);//Forward 80%
+   wait_us(2500000);
+
+      //turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(800000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   //go forward
+   Wheel.Speed(0.8f,0.8f);//Forward 80%
+   wait_us(1000000);
+
+   //turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(1000000);
+
+    Wheel.Stop();
+
+   
 
 
-    jingle_bells(2);
+    
+
 
 
 

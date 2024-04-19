@@ -14,7 +14,7 @@
                     beat : this param is beat value. (1..16) 1 means 1/16 beat
    * @retval    None
    */
-void Tune(PwmOut name, int period, int beat)
+void Tune(PwmOut& name, int period, int beat)
 {  
     int delay,count;
     delay = beat*63;
@@ -36,7 +36,7 @@ ThisThread::sleep_for(63ms);
                     beat : this param is beat value. (1..16) 1 means 1/16 beat
    * @retval    None
    */
-void Auto_tunes(PwmOut name, int period, int beat)
+void Auto_tunes(PwmOut& name, int period, int beat)
 {    
     int delay;
     
@@ -52,7 +52,7 @@ void Auto_tunes(PwmOut name, int period, int beat)
    * @param  name : Choose the PwmOut
    * @retval    None
    */
-void Stop_tunes(PwmOut name)
+void Stop_tunes(PwmOut& name)
 {
     name.period_us(0);
 }

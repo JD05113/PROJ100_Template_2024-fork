@@ -107,9 +107,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-void Tune(PwmOut name, int period, int beat);
-void Auto_tunes(PwmOut name, int period, int beat);
-void Stop_tunes(PwmOut name);
+void Tune(PwmOut& name, int period, int beat);
+void Auto_tunes(PwmOut& name, int period, int beat);
+void Stop_tunes(PwmOut& name);
         
 /* Private functions ---------------------------------------------------------*/
 
