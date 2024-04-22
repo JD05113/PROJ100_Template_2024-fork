@@ -67,58 +67,138 @@ int main ()
  // simple_test();
    
    // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.8f);//Forward 80%
-   wait_us(2500000);
-
-   //go reverse for 50 cm
-   Wheel.Speed(-0.9f,-0.9f);//Forward 80%
-   wait_us(2500000);
-   
-
-    //turn right 
-   Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(800000);
-
-    //stop wheels for sometime
-   Wheel.Stop();
-   //go forward
-   Wheel.Speed(0.8f,0.8f);//Forward 80%
-   wait_us(1000000);
-
-   //turn left
-   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
    wait_us(1000000);
 
     Wheel.Stop();
+   wait_us(100000);
 
-      // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.8f);//Forward 80%
-   wait_us(2500000);
-
-   //go reverse for 50 cm
-   Wheel.Speed(-0.9f,-0.9f);//Forward 80%
-   wait_us(2500000);
-
-      //turn right 
+   // first turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(800000);
+   wait_us(80000);
 
-    //stop wheels for sometime
-   Wheel.Stop();
-   //go forward
-   Wheel.Speed(0.8f,0.8f);//Forward 80%
+
+
+    // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
    wait_us(1000000);
 
-   //turn left
-   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   
+    
+    Wheel.Stop();
+   wait_us(100000);
+
+   //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
    wait_us(1000000);
 
     Wheel.Stop();
+   wait_us(100000);
+
+   //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(700000);
+
+    
+    Wheel.Stop();
+   wait_us(100000);
+
+  
+
+    // first turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(850000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   wait_us(100000);
+
+
+   //go forward
+   Wheel.Speed(0.7f,0.8f);//Forward 80%
+   wait_us(2000000);
+    
+    Wheel.Stop();
+   wait_us(100000);
+
+    // turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(80000);
+
+
+
+
+    //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(1500000);
+
+
+    Wheel.Stop();
+   wait_us(100000);
+
+    // first turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(1000000);
+
+   // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(2000000);
+ 
+
+    Wheel.Stop();
+   wait_us(100000);
+
+   //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(2000000);
+
+    Wheel.Stop();
+   wait_us(100000);
+
+
+
+    // second turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(700000);
 
    
+    Wheel.Stop();
+   wait_us(100000);
+
+    //go forward
+   Wheel.Speed(0.7f,0.8f);//Forward 80%
+   wait_us(2000000);
+
+    Wheel.Stop();
+   wait_us(100000);
+
+    //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(1500000);
+
+    Wheel.Stop();
+   wait_us(100000);
+
+    // second turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(1000000);
+
+
+    Wheel.Stop();
+   wait_us(100000);
+
+
+    //go forward
+   Wheel.Speed(0.8f,0.8f);//Forward 80%
+   wait_us(500000);
+
+    Wheel.Stop();
+   wait_us(10000000);
+
 
 
     
+
 
 
 
