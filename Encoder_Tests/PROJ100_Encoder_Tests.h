@@ -29,6 +29,8 @@ void simple_test();
 // Uses the non-blocking 
 void speed_test();
 
+void new_test();
+
 
 
 #endif

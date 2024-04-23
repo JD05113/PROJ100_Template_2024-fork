@@ -10,6 +10,45 @@
 // detected since the last call, 0 if no pulse has been detected since the last call, -1 if the 
 // wheel is stationary and -2 if there is an error
 
+
+void new_test(){
+    
+    // Apply power to the left motor only
+    Wheel.Speed(0.0f,0.0f);
+    int counter = 0;
+
+    // This loops runs forever
+    while(1){
+        // // Check to see if we have received a new pulse
+
+        //     // If so, read the pulse time from the timer
+        //     // This line is ugly but it just reads the timer and converts the time to milliseconds
+        //     uint32_t ms = std::chrono::duration_cast<std::chrono::milliseconds>(t.elapsed_time()).count();
+            
+        //     // Reset the timer
+        //     t.reset();
+
+        //     // Toggle the LED
+        //     led=!led;
+
+        //     // Only print every 10 pulses
+        //     counter++;
+        //     if(counter % 10 == 0 ){
+        //         printf("Pulse time %dms, Pulses received %d\r\n",ms,counter);   // Print the pulse time
+        //     }
+        // }
+        int pulse_rec = left_encoder.pulseReceived();
+        if(pulse_rec>0){
+            counter++;
+            if(counter==123){
+                //stop
+                
+            }
+        }
+        printf("%d   %d\n\r", pulse_rec,counter);
+        wait_us(100000);    }
+
+}
 void simple_test(){
     // Variables and objects
     DigitalOut led(LED1);       // We will toggle an LED every time we get a pulse
