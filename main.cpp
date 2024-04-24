@@ -12,7 +12,16 @@
 #define DEBOUNCE_US                 30000
 
 
-void myOneMetreCode(void);
+void myOneMetreCode(void){
+
+    //do my 1 metre movement
+
+printf("1 metre\n");
+
+jingle_bells(2);
+
+
+}
 
 
 DigitalIn microswitch1(D4);         //Instance of the DigitalIn class called 'microswitch1'
@@ -32,13 +41,19 @@ int main ()
 {
 
 
-
-    if(myButton==1){
+   /*  if(myButton==1){
         code_sec = 1;
     }
 
-    wait_us(1000*1000);
+    wait_us(2000000);
 
+    if (myButton==1){
+        code_sec = 2;
+    }
+    if (code_sec ==1){
+        */
+
+    
     // Clear the terminal and print an intro
     printf("\033[2J\033[1;1H\r\n");
     printf("Plymouth University PROJ100 2023/24 Optical Encoder Demonstration\n\r");
@@ -74,9 +89,12 @@ int main ()
 
 
    //jingle_bells(2);
+   
 
    
    while(true){
+
+     
 
         //   if(code_sec==0){
         //poush beads
@@ -90,30 +108,39 @@ int main ()
    
 
    
-   // go forwarrd for 50 cm
+   // go forwarrd for 12cm
    Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1000000);
+   wait_us(500000);
 
-
-   // first turn right 
+   // little turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
    wait_us(80000);
 
+  
+    // go forwarrd for 18 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(800000);
 
-    Wheel.Stop();
+   Wheel.Stop();
    wait_us(100000);
 
-    // go forwarrd for 50 cm
+    
+    // go forwarrd for 20 cm
    Wheel.Speed(0.8f,0.9f);//Forward 80%
    wait_us(1000000);
 
+
+   // little turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(80000);
+
    
-   //go reverse for 50 cm
+   //go reverse for 25 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
    wait_us(1000000);
 
 
-   // first turn left
+   // little turn left
    Wheel.Speed(0.7f,-0.5f);//Forward 80%
    wait_us(120000);
 
@@ -122,16 +149,16 @@ int main ()
    wait_us(100000);
 
 
-   //go reverse for 50 cm
+   //go reverse for 25 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
    wait_us(900000);
 
-    // go forwarrd for 50 cm
+    // go forwarrd for 30 cm
    Wheel.Speed(0.8f,0.9f);//Forward 80%
    wait_us(1000000);
 
 
-   // first turn right 
+   // little turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
    wait_us(80000);
 
@@ -140,30 +167,26 @@ int main ()
 
 
 
-    // go forwarrd for 50 cm
+    // go forwarrd for 30 cm
    Wheel.Speed(0.7f,0.8f);//Forward 80%
    wait_us(1000000);
 
    
-    
     Wheel.Stop();
    wait_us(100000);
 
 
-   //go reverse for 50 cm
+   //go reverse for 30 cm
    Wheel.Speed(-0.7f,-0.8f);//Forward 80%
    wait_us(1000000);
 
-    Wheel.Stop();
-   wait_us(100000);
 
-
-    // first turn left
+    // little turn left
    Wheel.Speed(0.7f,-0.5f);//Forward 80%
    wait_us(110000);
 
 
-   //go reverse for 50 cm
+   //go reverse for 30 cm
    Wheel.Speed(-0.7f,-0.8f);//Forward 80%
    wait_us(1000000);
 
@@ -181,38 +204,19 @@ int main ()
    wait_us(100000);
 
 
-   //go forward
+   //go forward for 50 cm
    Wheel.Speed(0.7f,0.8f);//Forward 80%
-   wait_us(1500000);
-    
-    Wheel.Stop();
-   wait_us(100000);
-
-    // first turn right 
-   Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(80000);
-
-    
-
-    //go forward
-   Wheel.Speed(0.7f,0.8f);//Forward 80%
-   wait_us(1000000);
-
-    // turn right 
-   Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(80000);
-
-
-
-
-    //go reverse for 50 cm
-   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
    wait_us(2000000);
-
-
-    Wheel.Stop();
+    
+   Wheel.Stop();
    wait_us(100000);
 
+    //go reverse for 30 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(1200000);
+
+
+  
     // first turn left
    Wheel.Speed(0.7f,-0.5f);//Forward 80%
    wait_us(1000000);
@@ -222,16 +226,12 @@ int main ()
    wait_us(1500000);
  
 
-    Wheel.Stop();
-   wait_us(100000);
-
    //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1500000);
+   wait_us(1800000);
 
     Wheel.Stop();
    wait_us(100000);
-
 
 
     // second turn right 
@@ -243,46 +243,44 @@ int main ()
    wait_us(100000);
 
     //go forward
-   Wheel.Speed(0.7f,0.8f);//Forward 80%
-   wait_us(2000000);
+   Wheel.Speed(0.8f,0.6f);//Forward 80%
+   wait_us(4000000);
 
     Wheel.Stop();
    wait_us(100000);
 
     //go reverse for 50 cm
-   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1500000);
+   Wheel.Speed(-0.8f,-0.6f);//Forward 80%
+   wait_us(3000000);
 
     Wheel.Stop();
    wait_us(100000);
 
-    // second turn left
-   Wheel.Speed(0.7f,-0.5f);//Forward 80%
-   wait_us(1000000);
-
-
-    Wheel.Stop();
-   wait_us(100000);
-
-
-    //go forward
-   Wheel.Speed(0.8f,0.8f);//Forward 80%
-   wait_us(1000000);
-
-    Wheel.Stop();
-   wait_us(100000);
-
-    //go reverse for 50 cm
-   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1000000);
-
-    // second turn right 
+    // third turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(700000);
+   wait_us(200000);
 
-     //go forward
-   Wheel.Speed(0.8f,0.8f);//Forward 80%
-   wait_us(1000000);
+     Wheel.Stop();
+   wait_us(100000);
+
+   //go forward
+   Wheel.Speed(0.8f,0.6f);//Forward 80%
+   wait_us(4000000);
+
+    Wheel.Stop();
+   wait_us(100000);
+
+    //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.6f);//Forward 80%
+   wait_us(3000000);
+
+
+
+
+
+   
+
+
 
 
 
@@ -300,15 +298,11 @@ int main ()
         // ..and here
 
     }
+
+
+if (code_sec==2){
+
+void myOneMetreCode();
+
 }
-
-
-void myOneMetreCode()
-{
-    //do my 1 metre movement
-
-printf("1 metre\n");
-
-
-
 }
