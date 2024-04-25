@@ -87,7 +87,7 @@ int main ()
     // These contain while(1) loops so ensure that they are removed or commented out when running your own code
     // If these lines are left in the lines below will never run
     /*************************************************/
-// speed_test();
+ //speed_test();
     
     //new_test();
 
@@ -97,6 +97,8 @@ int main ()
    
    
    while(true){
+
+  
 
      
 
@@ -114,7 +116,7 @@ int main ()
    
    // go forwarrd for 12cm
    Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(500000);
+   wait_us(600000);
 
    // little turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
@@ -131,7 +133,7 @@ int main ()
     
     // go forwarrd for 20 cm
    Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1000000);
+   wait_us(800000);
 
 
    // little turn right 
@@ -156,50 +158,9 @@ int main ()
    //go reverse for 25 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
    wait_us(900000);
-
-    // go forwarrd for 30 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1000000);
-
-
-   // little turn right 
-   Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(80000);
-
-    Wheel.Stop();
-   wait_us(100000);
-
-
-
-    // go forwarrd for 30 cm
-   Wheel.Speed(0.7f,0.8f);//Forward 80%
-   wait_us(1000000);
-
-   
-    Wheel.Stop();
-   wait_us(100000);
-
-
-   //go reverse for 30 cm
-   Wheel.Speed(-0.7f,-0.8f);//Forward 80%
-   wait_us(1000000);
-
-
-    // little turn left
-   Wheel.Speed(0.7f,-0.5f);//Forward 80%
-   wait_us(110000);
-
-
-   //go reverse for 30 cm
-   Wheel.Speed(-0.7f,-0.8f);//Forward 80%
-   wait_us(1000000);
-
-    
-    Wheel.Stop();
-   wait_us(100000);
   
-
-    // first turn right 
+/*
+   // first turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
    wait_us(750000);
 
@@ -207,23 +168,15 @@ int main ()
    Wheel.Stop();
    wait_us(100000);
 
-
-   //go forward for 50 cm
-   Wheel.Speed(0.7f,0.8f);//Forward 80%
-   wait_us(2000000);
-    
-   Wheel.Stop();
-   wait_us(100000);
-
-    //go reverse for 30 cm
-   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1200000);
+    // go forwarrd for 30 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(10000);
 
 
-  
+   
     // first turn left
    Wheel.Speed(0.7f,-0.5f);//Forward 80%
-   wait_us(1000000);
+   wait_us(700000);
 
    // go forwarrd for 50 cm
    Wheel.Speed(0.8f,0.9f);//Forward 80%
@@ -236,11 +189,88 @@ int main ()
 
     Wheel.Stop();
    wait_us(100000);
+   */
+
+   
+   // first turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(750000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   wait_us(100000);
+
+    // go forwarrd for 30 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(300000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   wait_us(100000);
+
+   
+   // first turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(600000);
+
+
+
+    // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(1700000);
+
+   //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(1700000);
+
+ 
+   // first turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(750000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   wait_us(100000);
+
+
+    // go forwarrd for 30 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(300000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   wait_us(100000);
+
+   
+   // first turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(700000);
+
+
+
+    // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(1500000);
+
+   //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(1500000);
+
+
+
+
+
+
+   // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(1500000);
+ 
+ 
 
 
     // second turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(700000);
+   wait_us(750000);
 
    
     Wheel.Stop();
@@ -248,7 +278,7 @@ int main ()
 
     //go forward
    Wheel.Speed(0.8f,0.6f);//Forward 80%
-   wait_us(4000000);
+   wait_us(3000000);
 
     Wheel.Stop();
    wait_us(100000);
@@ -269,7 +299,69 @@ int main ()
 
    //go forward
    Wheel.Speed(0.8f,0.6f);//Forward 80%
+   wait_us(5000000);
+
+    Wheel.Stop();
+   wait_us(100000);
+
+    //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.6f);//Forward 80%
    wait_us(4000000);
+
+    // first turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(750000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   wait_us(100000);
+
+    // go forwarrd for 30 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(100000);
+
+    //stop wheels for sometime
+   Wheel.Stop();
+   wait_us(100000);
+
+   
+   // first turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(700000);
+
+
+
+    // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(1500000);
+
+   //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
+   wait_us(1800000);
+
+
+
+
+
+
+   // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(1500000);
+ 
+ 
+
+
+    // second turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(750000);
+
+   
+    Wheel.Stop();
+   wait_us(100000);
+
+    //go forward
+   Wheel.Speed(0.8f,0.6f);//Forward 80%
+   wait_us(3000000);
 
     Wheel.Stop();
    wait_us(100000);
@@ -278,22 +370,13 @@ int main ()
    Wheel.Speed(-0.8f,-0.6f);//Forward 80%
    wait_us(3000000);
 
+    Wheel.Stop();
+   wait_us(100000);
 
 
+    Megalovania(2);
 
 
-   
-
-
-
-
-
-
-
-
-
-  
-    
 
 
 
@@ -309,4 +392,5 @@ if (code_sec==2){
 void myOneMetreCode();
 
 }
+
 }
