@@ -4,6 +4,8 @@
 #include "pwm_tone.h"
 #include "PROJ100_Encoder.h"
 #include "PROJ100_Encoder_Tests.h"
+#include <chrono>
+#include <cstdint>
 
 #define TIME_PERIOD 10             //Constant compiler Values here 10 equates to 10ms or 100Hz base Frequency
 #define ENCODER_PIN_LEFT            D8
@@ -12,20 +14,6 @@
 #define DEBOUNCE_US                 30000
 
 
-void myOneMetreCode(void){
-
-   // uint16_t PROJ100_Encoder::getPulsesPerRotation(){
-   // return _pulses_per_rotation;
-
-
- 
-
-
-
-jingle_bells(2);
-
-
-}
 
 
 DigitalIn microswitch1(D4);         //Instance of the DigitalIn class called 'microswitch1'
@@ -39,6 +27,97 @@ PROJ100_Encoder right_encoder (ENCODER_PIN_RIGHT,PULSES_PER_ROTATION);  //Instan
 PROJ100_Encoder left_encoder(ENCODER_PIN_LEFT,PULSES_PER_ROTATION);     //Instance of the PROJ100Encoder class called 'left_encoder'
 
 UnbufferedSerial ser(USBTX,USBRX,115200);   // Serial object for printing info
+
+int32_t left_pulse_time;
+int32_t right_pulse_time;
+int right_encoder_count;
+int left_encoder_count;
+int metre_flag = 0;
+int turn_flag = 0;
+int pulse_delay = 1;
+
+
+void ForwardDistance(){
+    Wheel.Speed(0.8f,0.9f);
+    while(metre_flag == 0){
+        left_pulse_time = left_encoder.getLastPulseTimeUs();
+        right_pulse_time = right_encoder.getLastPulseTimeUs();
+        if(left_pulse_time > 0){
+            left_encoder_count += 1;
+
+
+        }
+        if(right_pulse_time > 0){
+            right_encoder_count += 1;
+        }
+        if((left_encoder_count > 44)||(right_encoder_count > 44)  ){
+            Wheel.Stop();
+            metre_flag = 1;
+        }
+        ThisThread::sleep_for(std::chrono::milliseconds(pulse_delay));
+    }
+
+   // uint16_t PROJ100_Encoder::getPulsesPerRotation(){
+   // return _pulses_per_rotation;
+}
+void FastRotate(){
+    left_pulse_time = 0;
+    right_pulse_time = 0;
+    turn_flag = 0;
+    Wheel.Speed(0.6f,-0.6f);
+    while(turn_flag == 0){
+        left_pulse_time = left_encoder.getLastPulseTimeUs();
+        right_pulse_time = right_encoder.getLastPulseTimeUs();
+        if(left_pulse_time > 0){
+            left_encoder_count += 1;
+
+
+        }
+        if(right_pulse_time > 0){
+            right_encoder_count += 1;
+        }
+        if((left_encoder_count > 10)||(right_encoder_count > 10)  ){
+            //diameter of turning circle is 147mm, half circ is 461.8  mm
+            //461.8/21.99mm(1 pulse) = 20.99 pulses
+            //both wheels move so half?
+            Wheel.Stop();
+            turn_flag = 1;
+        }
+        ThisThread::sleep_for(std::chrono::milliseconds(pulse_delay));
+    }
+}
+
+
+void myOneMetreCode(){
+    ForwardDistance();
+    FastRotate();
+    ForwardDistance();
+    FastRotate();
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int code_sec=0;
 int main ()
@@ -303,10 +382,8 @@ int main ()
 
     }
 
-
 if (code_sec==2){
 
-void myOneMetreCode();
 
 }
 }
