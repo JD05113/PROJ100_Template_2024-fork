@@ -7,4 +7,6 @@ extern void twinkle(int s);
 extern void tone1(void);
 extern void tone2(void);
 extern void Megalovania(int s);
+extern void Buzz(int s);
+
 #endif
