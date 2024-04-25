@@ -6,6 +6,7 @@
 #include "PROJ100_Encoder_Tests.h"
 #include <chrono>
 #include <cstdint>
+#include <cstdio>
 
 #define TIME_PERIOD 10             //Constant compiler Values here 10 equates to 10ms or 100Hz base Frequency
 #define ENCODER_PIN_LEFT            D8
@@ -40,6 +41,7 @@ int pulse_delay = 1;
 void ForwardDistance(){
     Wheel.Speed(0.8f,0.9f);
     while(metre_flag == 0){
+        printf("right encoder %c",right_encoder_count);
         left_pulse_time = left_encoder.getLastPulseTimeUs();
         right_pulse_time = right_encoder.getLastPulseTimeUs();
         if(left_pulse_time > 0){
@@ -99,26 +101,6 @@ void myOneMetreCode(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int code_sec=0;
 int main ()
 {
@@ -171,6 +153,8 @@ int main ()
 
    Buzz(int (1));
 
+   code_sec= 1;
+
 
    wait_us(1500000);
 
@@ -178,6 +162,8 @@ int main ()
     { 
         Buzz(int (1));
 
+        code_sec= 2;
+       
         wait_us(1500000);
 
         if (myButton==1)
@@ -185,17 +171,23 @@ int main ()
 
             Buzz(int (1));
 
+            code_sec= 3;
+
             wait_us(1500000);
 
         }
     }
+
+    if (code_sec== 1){
+
+    
      while(true){
 
   
 
      
 
-        //   if(code_sec==0){
+        //   if{
         //poush beads
         //    }
        //else{
@@ -636,6 +628,8 @@ int main ()
 
      }
 
+    }
+
     
 
 
@@ -646,9 +640,12 @@ int main ()
         // ..and here
     
 
-if (code_sec==2){
-
-
+if (code_sec == 2){
+    Megalovania(2);
+}
+if (code_sec==3){
+printf("ran");
+myOneMetreCode();
 }
 
 }
