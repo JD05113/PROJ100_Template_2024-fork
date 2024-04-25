@@ -112,3 +112,6 @@ void Megalovania(int s){
     wait_us(325000);
     buzzer.period_ms(TIME_PERIOD);
 }
+void Buzz(int s){
+    Tune(buzzer,1e6/C3,s*2);
+}
