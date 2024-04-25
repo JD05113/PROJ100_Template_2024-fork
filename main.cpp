@@ -14,9 +14,13 @@
 
 void myOneMetreCode(void){
 
-    //do my 1 metre movement
+   // uint16_t PROJ100_Encoder::getPulsesPerRotation(){
+   // return _pulses_per_rotation;
 
-printf("1 metre\n");
+
+ 
+
+
 
 jingle_bells(2);
 
