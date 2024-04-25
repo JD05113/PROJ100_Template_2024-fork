@@ -81,18 +81,32 @@ void twinkle(int s){
   }
 void Megalovania(int s){
     Tune(buzzer,1e6/Dd4,s*2);
+    wait_us(125);
     Tune(buzzer,1e6/Dd4,s*2);
+    wait_us(125);
     Tune(buzzer,1e6/Dd5,s*2);
+    wait_us(250);
     Tune(buzzer,1e6/Aa4,s*2);
+    wait_us(250);
     Tune(buzzer,1e6/G4,s*2);
+    wait_us(350);
     Tune(buzzer,1e6/F4,s*2);
+    wait_us(250);
     Tune(buzzer,1e6/Dd4,s*2);
+    wait_us(250);
     Tune(buzzer,1e6/F4,s*2);
+    wait_us(250);
     Tune(buzzer,1e6/G4,s*2);
+    wait_us(350);
     Tune(buzzer,1e6/C4,s*2);
+    wait_us(125);
     Tune(buzzer,1e6/C4,s*2);
+    wait_us(125);
     Tune(buzzer,1e6/C4,s*2);
+    wait_us(125);
     Tune(buzzer,1e6/C4,s*2);
+    wait_us(125);
     Tune(buzzer,1e6/C4,s*2);
+    wait_us(125);
     buzzer.period_ms(TIME_PERIOD);
 }
