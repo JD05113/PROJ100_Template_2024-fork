@@ -95,20 +95,20 @@ void Megalovania(int s){
     Tune(buzzer,1e6/F4,s*2);
     wait_us(250000);
     Tune(buzzer,1e6/Dd4,s*2);
-    wait_us(250000);
+    wait_us(150000);
     Tune(buzzer,1e6/F4,s*2);
-    wait_us(250000);
+    wait_us(150000);
     Tune(buzzer,1e6/G4,s*2);
-    wait_us(350000);
+    wait_us(150000);
     Tune(buzzer,1e6/C4,s*2);
     wait_us(125000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(125000);
+    wait_us(325000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(125000);
+    wait_us(325000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(125000);
+    wait_us(325000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(125000);
+    wait_us(325000);
     buzzer.period_ms(TIME_PERIOD);
 }
