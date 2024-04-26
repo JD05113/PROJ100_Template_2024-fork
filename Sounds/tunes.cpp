@@ -135,7 +135,7 @@ void Megalovania(int s){
     Tune(buzzer,1e6/A4,s*2);
     wait_us(350000);
     Tune(buzzer,1e6/A4s,s*2);
-    wait_us(250000);
+    wait_us(500000);
     Tune(buzzer,1e6/G4,s*2);
     wait_us(250000);
     Tune(buzzer,1e6/F4,s*2);
