@@ -103,13 +103,13 @@ void Megalovania(int s){
     Tune(buzzer,1e6/C4,s*2);
     wait_us(125000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(400000);
+    wait_us(300000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(400000);
+    wait_us(300000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(400000);
+    wait_us(300000);
     Tune(buzzer,1e6/C4,s*2);
-    wait_us(400000);
+    wait_us(300000);
     Tune(buzzer,1e6/D5,s*2);
     wait_us(250000);
     Tune(buzzer,1e6/A4,s*2);
