@@ -37,9 +37,9 @@ void metre_test(){
     uint16_t lcounter = 0;        // Variable to hold a count of the number of pulses received
     uint16_t rcounter = 0;        // Variable to hold a count of the number of pulses received
     int rate_ms = 1;
-    float pwm_increment = 0.02f;
+    float pwm_increment = 0.01f;
     // Apply power to the left motor only 
-    Wheel.Speed(0.3f,0.4f);
+    Wheel.Speed(0.26f,0.44f);
    
 
     // This loops runs forever
@@ -247,7 +247,7 @@ int main ()
 
             wait_us(1500000);
 
-
+             
             }
 
         }
@@ -265,11 +265,11 @@ int main ()
 
    
    // go forwarrd for 12cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
    wait_us(600000);
 
     // go forwarrd for 12cm
-    Wheel.Speed(0.8f,0.9f);//Forward 80%
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
     wait_us(500000);
 
 
@@ -280,7 +280,7 @@ int main ()
   
 
     // go forwarrd for 18 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
    wait_us(800000);
 
    Wheel.Stop();
@@ -288,7 +288,7 @@ int main ()
 
     
     // go forwarrd for 20 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
    wait_us(800000);
 
 
@@ -371,13 +371,13 @@ int main ()
 
     // go forwarrd for 50 cm
    Wheel.Speed(0.6f,0.8f);//Forward 80%
-   wait_us(1700000);
+   wait_us(2000000);
 
 
 
    //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1500000);
+   wait_us(1700000);
 
  
    // second turn right 
@@ -725,12 +725,12 @@ if (code_sec == 2){
 
 
     //go forward
-    Wheel.Speed(0.4f,0.8f);//Forward 80%
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
     wait_us(600000);
 
     // third turn right 
     Wheel.Speed(-0.8f,0.8f);//Forward 80%
-    wait_us(900000);
+    wait_us(800000);
 
     //go forward
     Wheel.Speed(0.6f,0.8f);//Forward 80%
@@ -808,15 +808,20 @@ if (code_sec == 2){
 }
 if (code_sec==3){
 printf("ran");
- metre_test();
- turn_test();
+metre_test();
+ThisThread::sleep_for(std::chrono::milliseconds(1000));
+turn_test();
+ThisThread::sleep_for(std::chrono::milliseconds(1000));
+metre_test();
+ThisThread::sleep_for(std::chrono::milliseconds(1000));
+turn_test();
+Megalovania(2);
+
+
 }
 
 if (code_sec==4){
-    //go forward
-    Wheel.Speed(0.6f,0.8f);//Forward 80%
-    wait_us(1500000);
-
+   Megalovania(2);
     
 }
 
