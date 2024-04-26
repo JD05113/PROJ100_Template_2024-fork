@@ -821,3 +821,138 @@ if (code_sec==4){
 }
 
 }
+
+
+
+
+
+void forward_test(){
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Experiment with these values
+    float target_rpm = 30.0f;       // What rpm are we going to try to achieve?
+    float pwm_increment = 0.002f;   // This value affects how quickly we can reach the target but also the stability of our controller
+    int loop_delay_ms = 1;          // This sets how often the loop runs
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // We will print the current and target speed periodically using a timer
+    Timer print_timer;
+    print_timer.start();
+
+    // We will save the previous speed so that it can be printed
+    float last_rpm = 0.0f;
+
+    while(1){
+
+        // Check to see if a pulse has been received and it's time in us
+        int32_t lefttime = left_encoder.getLastPulseTimeUs();
+        int32_t righttime = right_encoder.getLastPulseTimeUs();
+        // If a pulse has been received..
+        if((lefttime>0) || (righttime>0)){
+
+            // Calculate RPM
+            int ppr = left_encoder.getPulsesPerRotation();
+            int ppr2 = right_encoder.getPulsesPerRotation();      // To work out how fast we are going we need to know how many pulses are in a complete rotation
+            float rpm = (60000000.0f/(ppr*lefttime));
+            float rpm2 =      (60000000.0f/(ppr2*righttime));          // 60000000us = 60secs
+            
+            // Calculate error term
+            float err = target_rpm-rpm;
+            float err2 = target_rpm-rpm2;
+
+            if(target_rpm==0.0f){           // Is the target 0 rpm?...
+                Wheel.Speed(0.0f,0.0f);     // If so stop the motors 
+            }
+            // Otherwise increase or decrease PWM if we are going too fast or slow
+            else{
+                if(rpm < target_rpm){
+                    Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()+pwm_increment);
+                }
+                else if(rpm > target_rpm){
+                    Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()-pwm_increment);
+                }
+            }  
+
+            //Update value for printing
+            
+        }
+ 
+        // Check to see if the wheel IS stationary
+        else if(righttime==-2){
+            //Update value for printing
+            last_rpm = 0.0f;        
+
+            // SHOULD the wheel be stationary? 
+            if(target_rpm !=0.0f){
+                Wheel.Speed(0.0f,Wheel.getSpeedLeft()+pwm_increment);   // If not increase the power to turn the wheel
+                                                                        // (This serves to start the motor if it is not yet turning)
+            }
+            else{
+                Wheel.Speed(0.0f,0.0f);                                 //If so, ensure the motor is stopped
+            }
+        }
+        /////////////////// RIGHT ///////////////////
+        int32_t time = left_encoder.getLastPulseTimeUs();
+        int32_t time2 = right_encoder.getLastPulseTimeUs();
+        // If a pulse has been received..
+        if((time>0) || (time2>0)){
+
+            // Calculate RPM
+            int ppr = left_encoder.getPulsesPerRotation();
+            int ppr2 = right_encoder.getPulsesPerRotation();      // To work out how fast we are going we need to know how many pulses are in a complete rotation
+            float rpm = (60000000.0f/(ppr*time));
+            float rpm2 =      (60000000.0f/(ppr2*time2));          // 60000000us = 60secs
+            
+            // Calculate error term
+            float err = target_rpm-rpm;
+            float err2 = target_rpm-rpm2;
+
+            if(target_rpm==0.0f){           // Is the target 0 rpm?...
+                Wheel.Speed(0.0f,0.0f);     // If so stop the motors 
+            }
+            // Otherwise increase or decrease PWM if we are going too fast or slow
+            else{
+                if(rpm < target_rpm){
+                    Wheel.Speed(Wheel.getSpeedRight()+pwm_increment,Wheel.getSpeedLeft());
+                }
+                else if(rpm > target_rpm){
+                    Wheel.Speed(Wheel.getSpeedRight()-pwm_increment,Wheel.getSpeedLeft());
+                }
+            }  
+
+            //Update value for printing
+            
+        }
+ 
+       
+        
+        
+        
+        } 
+    }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
