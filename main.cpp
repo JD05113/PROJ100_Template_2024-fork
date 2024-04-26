@@ -29,6 +29,82 @@ PROJ100_Encoder left_encoder(ENCODER_PIN_LEFT,PULSES_PER_ROTATION);     //Instan
 
 UnbufferedSerial ser(USBTX,USBRX,115200);   // Serial object for printing info
 
+
+
+
+void metre_test(){
+          
+    uint16_t lcounter = 0;        // Variable to hold a count of the number of pulses received
+    uint16_t rcounter = 0;        // Variable to hold a count of the number of pulses received
+    int rate_ms = 1;
+    float pwm_increment = 0.02f;
+    // Apply power to the left motor only 
+    Wheel.Speed(0.3f,0.4f);
+   
+
+    // This loops runs forever
+    while((lcounter < 93) && (rcounter < 93)){
+        
+        // Check to see if we have received a new pulse
+        if(left_encoder.pulseReceived()>0){
+            lcounter++;
+            if(lcounter>rcounter){
+                Wheel.Speed(Wheel.getSpeedRight()+pwm_increment,Wheel.getSpeedLeft());
+            }
+            printf("Speed is %f %f \n",Wheel.getSpeedLeft(),Wheel.getSpeedRight());
+            
+        }
+
+        if(right_encoder.pulseReceived()>0){
+            rcounter++;
+            if(rcounter>lcounter){
+                Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()+pwm_increment);
+            }
+        }
+        
+    }
+    Wheel.Stop();
+}
+
+
+
+
+
+
+void turn_test(){
+          
+    uint16_t lcounter = 0;        // Variable to hold a count of the number of pulses received
+    uint16_t rcounter = 0;        // Variable to hold a count of the number of pulses received
+    int rate_ms = 1;
+    float pwm_increment = 0.02f;
+    // Apply power to the left motor only 
+    Wheel.Speed(0.3f,-0.4f);
+   
+
+    // This loops runs forever
+    while((lcounter < 21) && (rcounter < 21)){
+        
+        // Check to see if we have received a new pulse
+        if(left_encoder.pulseReceived()>0){
+            lcounter++;
+            if(lcounter>rcounter){
+                Wheel.Speed(Wheel.getSpeedRight()+pwm_increment,Wheel.getSpeedLeft());
+            }
+            printf("Speed is %f %f \n",Wheel.getSpeedLeft(),Wheel.getSpeedRight());
+            
+        }
+
+        if(right_encoder.pulseReceived()>0){
+            rcounter++;
+            if(rcounter>lcounter){
+                Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()-pwm_increment);
+            }
+        }
+        
+    }
+    Wheel.Stop();
+}
+/*
 int32_t left_pulse_time;
 int32_t right_pulse_time;
 int right_encoder_count;
@@ -97,6 +173,7 @@ void myOneMetreCode(){
     FastRotate();
     
 }
+*/
 
 
 
@@ -104,19 +181,6 @@ void myOneMetreCode(){
 int code_sec=0;
 int main ()
 {
-
-
-   /*  if(myButton==1){
-        code_sec = 1;
-    }
-
-    wait_us(2000000);
-
-    if (myButton==1){
-        code_sec = 2;
-    }
-    if (code_sec ==1){
-        */
 
     
     // Clear the terminal and print an intro
@@ -174,6 +238,17 @@ int main ()
             code_sec= 3;
 
             wait_us(1500000);
+
+            if (myButton==1)
+            {
+                Buzz(int (1));
+
+                code_sec= 4;
+
+            wait_us(1500000);
+
+
+            }
 
         }
     }
@@ -238,7 +313,7 @@ int main ()
 
    //go reverse for 25 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(900000);
+   wait_us(700000);
   
 /*
    // first turn right 
@@ -294,15 +369,15 @@ int main ()
    Wheel.Speed(0.7f,-0.5f);//Forward 80%
    wait_us(600000);
 
-
-
     // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
    wait_us(1700000);
+
+
 
    //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1700000);
+   wait_us(1500000);
 
  
    // second turn right 
@@ -315,7 +390,7 @@ int main ()
 
 
     // go forwarrd for 30 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
    wait_us(300000);
 
     //stop wheels for sometime
@@ -330,8 +405,8 @@ int main ()
 
 
     // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1500000);
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
+   wait_us(1700000);
 
    //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
@@ -360,8 +435,8 @@ int main ()
    wait_us(700000);
 
     // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1500000);
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
+   wait_us(1700000);
 
 
     //go reverse for 50 cm
@@ -390,8 +465,8 @@ int main ()
    wait_us(700000);
 
     // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1500000);
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
+   wait_us(1700000);
 
 
     //go reverse for 50 cm
@@ -667,7 +742,7 @@ if (code_sec == 2){
 
 
     //go forward
-    Wheel.Speed(0.5f,0.9f);//Forward 80%
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
     wait_us(2000000);
 
     // little turn left
@@ -678,7 +753,7 @@ if (code_sec == 2){
     wait_us(100000);
 
     //go forward
-    Wheel.Speed(0.5f,0.9f);//Forward 80%
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
     wait_us(1500000);
 
 
@@ -728,26 +803,21 @@ if (code_sec == 2){
 
 
   
-  
 
-
-
-
-    
-
-
-
-
-
-
-
-
-    
     Megalovania(2);
 }
 if (code_sec==3){
 printf("ran");
-myOneMetreCode();
+ metre_test();
+ turn_test();
+}
+
+if (code_sec==4){
+    //go forward
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    wait_us(1500000);
+
+    
 }
 
 }
