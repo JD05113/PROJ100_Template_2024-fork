@@ -182,16 +182,6 @@ int main ()
 
     
      while(true){
-
-  
-
-     
-
-        //   if{
-        //poush beads
-        //    }
-       //else{
-       // other
     
 
         // Write the parts of your code which should run in a loop between here..
@@ -199,19 +189,18 @@ int main ()
    
 
    
-
    // go forwarrd for 12cm
    Wheel.Speed(0.8f,0.9f);//Forward 80%
    wait_us(600000);
 
-     // go forwarrd for 12cm
-     Wheel.Speed(0.8f,0.9f);//Forward 80%
-     wait_us(500000);
+    // go forwarrd for 12cm
+    Wheel.Speed(0.8f,0.9f);//Forward 80%
+    wait_us(500000);
 
 
-     // little turn right 
-     Wheel.Speed(-0.8f,0.8f);//Forward 80%
-     wait_us(80000);
+    // little turn right 
+    Wheel.Speed(-0.8f,0.8f);//Forward 80%
+    wait_us(80000);
 
   
 
@@ -316,7 +305,7 @@ int main ()
    wait_us(1700000);
 
  
-   // first turn right 
+   // second turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
    wait_us(750000);
 
@@ -334,7 +323,7 @@ int main ()
    wait_us(100000);
 
    
-   // first turn left
+   // second turn left
    Wheel.Speed(0.7f,-0.5f);//Forward 80%
    wait_us(700000);
 
@@ -347,20 +336,11 @@ int main ()
    //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
    wait_us(1500000);
-
-
-
-
-
-
-   // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1500000);
  
  
 
 
-    // second turn right 
+    // third turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
    wait_us(750000);
 
@@ -370,36 +350,60 @@ int main ()
 
     //go forward
    Wheel.Speed(0.8f,0.6f);//Forward 80%
-   wait_us(3000000);
+   wait_us(300000);
 
     Wheel.Stop();
    wait_us(100000);
+
+    // third turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(700000);
+
+    // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(1500000);
+
 
     //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.6f);//Forward 80%
-   wait_us(3000000);
+   wait_us(1500000);
 
     Wheel.Stop();
    wait_us(100000);
 
-    // third turn right 
+    // forth turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(200000);
+   wait_us(750000);
 
-     Wheel.Stop();
+    Wheel.Stop();
    wait_us(100000);
 
    //go forward
    Wheel.Speed(0.8f,0.6f);//Forward 80%
-   wait_us(5000000);
+   wait_us(300000);
 
     Wheel.Stop();
    wait_us(100000);
 
+    // forth turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(700000);
+
+    // go forwarrd for 50 cm
+   Wheel.Speed(0.8f,0.9f);//Forward 80%
+   wait_us(1500000);
+
+
     //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.6f);//Forward 80%
-   wait_us(4000000);
+   wait_us(1500000);
 
+    Wheel.Stop();
+   wait_us(10000000);
+
+
+
+    /*
     // first turn right 
    Wheel.Speed(-0.8f,0.8f);//Forward 80%
    wait_us(750000);
@@ -626,6 +630,8 @@ int main ()
        Wheel.Speed(-0.8f,-0.6f);//Forward 80%
        wait_us(3000000);
 
+       */
+
      }
 
     }
@@ -633,14 +639,110 @@ int main ()
     
 
 
-   
-
 
 
         // ..and here
     
 
 if (code_sec == 2){
+
+    
+
+
+    //go forward
+    Wheel.Speed(0.4f,0.8f);//Forward 80%
+    wait_us(600000);
+
+    // third turn right 
+    Wheel.Speed(-0.8f,0.8f);//Forward 80%
+    wait_us(900000);
+
+    //go forward
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    wait_us(100000);
+  
+
+    Wheel.Stop();
+    wait_us(100000);
+
+
+    //go forward
+    Wheel.Speed(0.5f,0.9f);//Forward 80%
+    wait_us(2000000);
+
+    // little turn left
+    Wheel.Speed(0.8f,-0.8f);//Forward 80%
+    wait_us(120000);
+
+   Wheel.Stop();
+    wait_us(100000);
+
+    //go forward
+    Wheel.Speed(0.5f,0.9f);//Forward 80%
+    wait_us(1500000);
+
+
+
+    // third turn left
+    Wheel.Speed(0.8f,-0.8f);//Forward 80%
+    wait_us(600000);
+
+
+
+    //go forward
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    wait_us(1500000);
+
+    Wheel.Stop();
+    wait_us(100000);
+
+    //go forward
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    wait_us(1500000);
+
+    Wheel.Stop();
+    wait_us(100000);
+
+
+    //go reverse for 50 cm
+    Wheel.Speed(-0.8f,-0.8f);//Forward 80%
+    wait_us(1500000);
+
+    Wheel.Stop();
+    wait_us(100000);
+
+    // little turn right
+    Wheel.Speed(-0.8f,0.8f);//Forward 80%
+    wait_us(200000);
+
+
+
+
+    //go reverse for 50 cm
+    Wheel.Speed(-0.6f,-0.8f);//Forward 80%
+    wait_us(1500000);
+
+
+
+
+
+
+  
+  
+
+
+
+
+    
+
+
+
+
+
+
+
+
+    
     Megalovania(2);
 }
 if (code_sec==3){
