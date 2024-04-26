@@ -32,35 +32,50 @@ UnbufferedSerial ser(USBTX,USBRX,115200);   // Serial object for printing info
 
 
 
-void metre_test(){
-          
+
+
+
+
+void metre_test(){ //function to travel forward one metre
     uint16_t lcounter = 0;        // Variable to hold a count of the number of pulses received
     uint16_t rcounter = 0;        // Variable to hold a count of the number of pulses received
-    int rate_ms = 1;
     float pwm_increment = 0.01f;
-    // Apply power to the left motor only 
-    Wheel.Speed(0.26f,0.44f);
+    int inccount = 0; //counts how many times the wheel speed has been incremented
+    // Apply power to motors
+    Wheel.Speed(0.37f,0.52f);
+    lcounter = 0;
+    rcounter = 0;
+    pwm_increment = 0.01f;
+    inccount = 0;
    
 
-    // This loops runs forever
-    while((lcounter < 93) && (rcounter < 93)){
+    // This loops runs for 1 metre
+    while((lcounter < 93) && (rcounter < 93     )){
         
         // Check to see if we have received a new pulse
         if(left_encoder.pulseReceived()>0){
             lcounter++;
             if(lcounter>rcounter){
-                Wheel.Speed(Wheel.getSpeedRight()+pwm_increment,Wheel.getSpeedLeft());
+                Wheel.Speed(Wheel.getSpeedRight()+pwm_increment,Wheel.getSpeedLeft()); //increase right wheel speed
+                inccount +=1;
             }
-            printf("Speed is %f %f \n",Wheel.getSpeedLeft(),Wheel.getSpeedRight());
+            printf("Speed is %f %f counters are %i %i pwm is %f \n",Wheel.getSpeedLeft(),Wheel.getSpeedRight(),lcounter,rcounter, pwm_increment);
             
         }
-
+        // Check to see if we have received a new pulse
         if(right_encoder.pulseReceived()>0){
             rcounter++;
             if(rcounter>lcounter){
-                Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()+pwm_increment);
+                Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()+pwm_increment); // increase left wheel speed
+                inccount +=1;
             }
+            printf("Speed is %f %f counters are %i %i pwm is %f \n",Wheel.getSpeedLeft(),Wheel.getSpeedRight(),lcounter,rcounter, pwm_increment);
         }
+       
+       /*if((lcounter > 50)&&(rcounter > 50)){
+            pwm_increment = 0;
+        }*/
+        
         
     }
     Wheel.Stop();
@@ -70,18 +85,16 @@ void metre_test(){
 
 
 
-
-void turn_test(){
+void turn_test(){ //function to rotate 180 degrees
           
     uint16_t lcounter = 0;        // Variable to hold a count of the number of pulses received
     uint16_t rcounter = 0;        // Variable to hold a count of the number of pulses received
-    int rate_ms = 1;
     float pwm_increment = 0.02f;
     // Apply power to the left motor only 
     Wheel.Speed(0.3f,-0.4f);
    
 
-    // This loops runs forever
+    // This loop runs for 180 degrees
     while((lcounter < 21) && (rcounter < 21)){
         
         // Check to see if we have received a new pulse
@@ -104,76 +117,6 @@ void turn_test(){
     }
     Wheel.Stop();
 }
-/*
-int32_t left_pulse_time;
-int32_t right_pulse_time;
-int right_encoder_count;
-int left_encoder_count;
-int metre_flag = 0;
-int turn_flag = 0;
-int pulse_delay = 1;
-
-
-void ForwardDistance(){
-    Wheel.Speed(0.8f,0.9f);
-    while(metre_flag == 0){
-        printf("right encoder %c",right_encoder_count);
-        left_pulse_time = left_encoder.getLastPulseTimeUs();
-        right_pulse_time = right_encoder.getLastPulseTimeUs();
-        if(left_pulse_time > 0){
-            left_encoder_count += 1;
-
-
-        }
-        if(right_pulse_time > 0){
-            right_encoder_count += 1;
-        }
-        if((left_encoder_count > 44)||(right_encoder_count > 44)  ){
-            Wheel.Stop();
-            metre_flag = 1;
-        }
-        ThisThread::sleep_for(std::chrono::milliseconds(pulse_delay));
-    }
-
-   // uint16_t PROJ100_Encoder::getPulsesPerRotation(){
-   // return _pulses_per_rotation;
-}
-void FastRotate(){
-    left_pulse_time = 0;
-    right_pulse_time = 0;
-    turn_flag = 0;
-    Wheel.Speed(0.6f,-0.6f);
-    while(turn_flag == 0){
-        left_pulse_time = left_encoder.getLastPulseTimeUs();
-        right_pulse_time = right_encoder.getLastPulseTimeUs();
-        if(left_pulse_time > 0){
-            left_encoder_count += 1;
-
-
-        }
-        if(right_pulse_time > 0){
-            right_encoder_count += 1;
-        }
-        if((left_encoder_count > 10)||(right_encoder_count > 10)  ){
-            //diameter of turning circle is 147mm, half circ is 461.8  mm
-            //461.8/21.99mm(1 pulse) = 20.99 pulses
-            //both wheels move so half?
-            Wheel.Stop();
-            turn_flag = 1;
-        }
-        ThisThread::sleep_for(std::chrono::milliseconds(pulse_delay));
-    }
-}
-
-
-void myOneMetreCode(){
-    ForwardDistance();
-    FastRotate();
-    ForwardDistance();
-    FastRotate();
-    
-}
-*/
 
 
 
@@ -211,10 +154,8 @@ int main ()
     // These contain while(1) loops so ensure that they are removed or commented out when running your own code
     // If these lines are left in the lines below will never run
     /***********************************************/
- //speed_test();
     
-    //new_test();
-
+   //
    Buzz(int (1));
 
    code_sec= 1;
@@ -315,37 +256,7 @@ int main ()
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
    wait_us(700000);
   
-/*
-   // first turn right 
-   Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(750000);
 
-    //stop wheels for sometime
-   Wheel.Stop();
-   wait_us(100000);
-
-    // go forwarrd for 30 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(10000);
-
-
-   
-    // first turn left
-   Wheel.Speed(0.7f,-0.5f);//Forward 80%
-   wait_us(700000);
-
-   // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1500000);
- 
-
-   //go reverse for 50 cm
-   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1800000);
-
-    Wheel.Stop();
-   wait_us(100000);
-   */
 
    
    // first turn right 
@@ -377,7 +288,7 @@ int main ()
 
    //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1700000);
+   wait_us(1800000);
 
  
    // second turn right 
@@ -466,255 +377,49 @@ int main ()
 
     // go forwarrd for 50 cm
    Wheel.Speed(0.6f,0.8f);//Forward 80%
-   wait_us(1700000);
+   wait_us(2000000);
 
 
     //go reverse for 50 cm
    Wheel.Speed(-0.8f,-0.6f);//Forward 80%
-   wait_us(1500000);
+   wait_us(1700000);
+
+    // fifth turn right 
+   Wheel.Speed(-0.8f,0.8f);//Forward 80%
+   wait_us(750000);
+
+    Wheel.Stop();
+   wait_us(100000);
+
+   //go forward
+   Wheel.Speed(0.8f,0.6f);//Forward 80%
+   wait_us(300000);
+
+    Wheel.Stop();
+   wait_us(100000);
+
+    // fifth turn left
+   Wheel.Speed(0.7f,-0.5f);//Forward 80%
+   wait_us(700000);
+
+    // go forwarrd for 50 cm
+   Wheel.Speed(0.6f,0.8f);//Forward 80%
+   wait_us(2000000);
+
+
+    //go reverse for 50 cm
+   Wheel.Speed(-0.8f,-0.6f);//Forward 80%
+   wait_us(1700000);
+
 
     Wheel.Stop();
    wait_us(10000000);
 
 
 
-    /*
-    // first turn right 
-   Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(750000);
-
-    //stop wheels for sometime
-   Wheel.Stop();
-   wait_us(100000);
-
-    // go forwarrd for 30 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(100000);
-
-    //stop wheels for sometime
-   Wheel.Stop();
-   wait_us(100000);
-
-   
-   // first turn left
-   Wheel.Speed(0.7f,-0.5f);//Forward 80%
-   wait_us(700000);
-
-
-
-    // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1500000);
-
-   //go reverse for 50 cm
-   Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-   wait_us(1800000);
-
-
-
-
-
-
-   // go forwarrd for 50 cm
-   Wheel.Speed(0.8f,0.9f);//Forward 80%
-   wait_us(1500000);
- 
- 
-
-
-    // second turn right 
-   Wheel.Speed(-0.8f,0.8f);//Forward 80%
-   wait_us(750000);
-
-   
-    Wheel.Stop();
-   wait_us(100000);
-
-    //go forward
-   Wheel.Speed(0.8f,0.6f);//Forward 80%
-   wait_us(3000000);
-
-    Wheel.Stop();
-   wait_us(100000);
-
-    //go reverse for 50 cm
-   Wheel.Speed(-0.8f,-0.6f);//Forward 80%
-   wait_us(3000000);
-
-    Wheel.Stop();
-   wait_us(100000);
-
-      // go forwarrd for 18 cm
-     Wheel.Speed(0.8f,0.9f);//Forward 80%
-     wait_us(800000);
-
-     Wheel.Stop();
-     wait_us(100000);
-
-
-    
-      // go forwarrd for 20 cm
-     Wheel.Speed(0.8f,0.9f);//Forward 80%
-     wait_us(1000000);
-
-    Megalovania(2);
-
-     // little turn right 
-     Wheel.Speed(-0.8f,0.8f);//Forward 80%
-     wait_us(80000);
-
-
-
-   
-     //go reverse for 25 cm
-     Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-     wait_us(1000000);
-
-
-     // little turn left
-     Wheel.Speed(0.7f,-0.5f);//Forward 80%
-     wait_us(120000);
-
-   
-      Wheel.Stop();
-      wait_us(100000);
-
-
-     //go reverse for 25 cm
-     Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-     wait_us(900000);
-
-      // go forwarrd for 30 cm
-     Wheel.Speed(0.8f,0.9f);//Forward 80%
-     wait_us(1000000);
-
-
-     // little turn right 
-     Wheel.Speed(-0.8f,0.8f);//Forward 80%
-     wait_us(80000);
-
-     Wheel.Stop();
-     wait_us(100000);
-
-
-
-      // go forwarrd for 30 cm
-     Wheel.Speed(0.7f,0.8f);//Forward 80%
-     wait_us(1000000);
-
-   
-     Wheel.Stop();
-     wait_us(100000);
-  
-
-     //go reverse for 30 cm
-     Wheel.Speed(-0.7f,-0.8f);//Forward 80%
-     wait_us(1000000);
-
-
-      // little turn left
-      Wheel.Speed(0.7f,-0.5f);//Forward 80%
-     wait_us(110000);
-
-
-     //go reverse for 30 cm
-     Wheel.Speed(-0.7f,-0.8f);//Forward 80%
-     wait_us(1000000);
-
-    
-      Wheel.Stop();
-     wait_us(100000);
-  
-
-      // first turn right 
-      Wheel.Speed(-0.8f,0.8f);//Forward 80%
-     wait_us(750000);
-
-     //stop wheels for sometime
-     Wheel.Stop();
-      wait_us(100000);
-
-
-     //go forward for 50 cm
-     Wheel.Speed(0.7f,0.8f);//Forward 80%
-     wait_us(2000000);
-    
-     Wheel.Stop();
-     wait_us(100000);
-
-     //go reverse for 30 cm
-     Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-     wait_us(1200000);
-
-
-  
-     // first turn left
-     Wheel.Speed(0.7f,-0.5f);//Forward 80%
-     wait_us(1000000);
-
-     // go forwarrd for 50 cm
-     Wheel.Speed(0.8f,0.9f);//Forward 80%
-     wait_us(1500000);
- 
-
-     //go reverse for 50 cm
-     Wheel.Speed(-0.8f,-0.9f);//Forward 80%
-     wait_us(1800000);
- 
-      Wheel.Stop();
-      wait_us(100000);
-
-
-     // second turn right 
-     Wheel.Speed(-0.8f,0.8f);//Forward 80%
-     wait_us(700000);
- 
-   
-      Wheel.Stop();
-     wait_us(100000);
-
-      //go forward
-     Wheel.Speed(0.8f,0.6f);//Forward 80%
-     wait_us(4000000);
-
-       Wheel.Stop();
-      wait_us(100000);
-
-      //go reverse for 50 cm
-      Wheel.Speed(-0.8f,-0.6f);//Forward 80%
-      wait_us(3000000);
-
-     Wheel.Stop();
-      wait_us(100000);
-
-      // third turn right 
-      Wheel.Speed(-0.8f,0.8f);//Forward 80%
-      wait_us(200000);
-
-     Wheel.Stop();
-      wait_us(100000);
-
-      //go forward
-      Wheel.Speed(0.8f,0.6f);//Forward 80%
-      wait_us(4000000);
- 
-       Wheel.Stop();
-      wait_us(100000);
-
-       //go reverse for 50 cm
-       Wheel.Speed(-0.8f,-0.6f);//Forward 80%
-       wait_us(3000000);
-
-       */
-
-     }
-
     }
 
-    
-
-
-
+    }
 
         // ..and here
     
@@ -726,14 +431,14 @@ if (code_sec == 2){
 
     //go forward
     Wheel.Speed(0.6f,0.8f);//Forward 80%
-    wait_us(600000);
+    wait_us(300000);
 
     // third turn right 
     Wheel.Speed(-0.8f,0.8f);//Forward 80%
     wait_us(800000);
 
     //go forward
-    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    Wheel.Speed(0.5f,0.8f);//Forward 80%
     wait_us(100000);
   
 
@@ -742,8 +447,8 @@ if (code_sec == 2){
 
 
     //go forward
-    Wheel.Speed(0.6f,0.8f);//Forward 80%
-    wait_us(2000000);
+    Wheel.Speed(0.5f,0.9f);//Forward 80%
+    wait_us(1500000);
 
     // little turn left
     Wheel.Speed(0.8f,-0.8f);//Forward 80%
@@ -753,8 +458,8 @@ if (code_sec == 2){
     wait_us(100000);
 
     //go forward
-    Wheel.Speed(0.6f,0.8f);//Forward 80%
-    wait_us(1500000);
+    Wheel.Speed(0.5f,0.9f);//Forward 80%
+    wait_us(1000000);
 
 
 
@@ -791,6 +496,51 @@ if (code_sec == 2){
     wait_us(200000);
 
 
+    //go reverse for 50 cm
+    Wheel.Speed(-0.6f,-0.8f);//Forward 80%
+    wait_us(1500000);
+
+
+    // third turn right 
+    Wheel.Speed(-0.8f,0.8f);//Forward 80%
+    wait_us(800000);
+
+    Wheel.Stop();
+    wait_us(100000);
+
+    //go forward
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    wait_us(100000);
+
+    // third turn left
+    Wheel.Speed(0.8f,-0.8f);//Forward 80%
+    wait_us(600000);
+
+     //go forward
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    wait_us(1500000);
+
+    Wheel.Stop();
+    wait_us(100000);
+
+    //go forward
+    Wheel.Speed(0.6f,0.8f);//Forward 80%
+    wait_us(1500000);
+
+    Wheel.Stop();
+    wait_us(100000);
+
+
+    //go reverse for 50 cm
+    Wheel.Speed(-0.8f,-0.8f);//Forward 80%
+    wait_us(1500000);
+
+    Wheel.Stop();
+    wait_us(100000);
+
+    // little turn right
+    Wheel.Speed(-0.8f,0.8f);//Forward 80%
+    wait_us(200000);
 
 
     //go reverse for 50 cm
@@ -802,160 +552,47 @@ if (code_sec == 2){
 
 
 
+    
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
   
 
-    Megalovania(2);
+    
 }
-if (code_sec==3){
+//Travel 1 metre and return with noise for Task B
+if (code_sec==3){ 
 printf("ran");
 metre_test();
 ThisThread::sleep_for(std::chrono::milliseconds(1000));
 turn_test();
 ThisThread::sleep_for(std::chrono::milliseconds(1000));
 metre_test();
+
 ThisThread::sleep_for(std::chrono::milliseconds(1000));
 turn_test();
 Megalovania(2);
 
 
 }
-
-if (code_sec==4){
-   Megalovania(2);
-    
+// 1 metre straight line
+if (code_sec==4){ 
+   metre_test(); 
 }
 
 }
-
-
-
-
-
-void forward_test(){
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Experiment with these values
-    float target_rpm = 30.0f;       // What rpm are we going to try to achieve?
-    float pwm_increment = 0.002f;   // This value affects how quickly we can reach the target but also the stability of our controller
-    int loop_delay_ms = 1;          // This sets how often the loop runs
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // We will print the current and target speed periodically using a timer
-    Timer print_timer;
-    print_timer.start();
-
-    // We will save the previous speed so that it can be printed
-    float last_rpm = 0.0f;
-
-    while(1){
-
-        // Check to see if a pulse has been received and it's time in us
-        int32_t lefttime = left_encoder.getLastPulseTimeUs();
-        int32_t righttime = right_encoder.getLastPulseTimeUs();
-        // If a pulse has been received..
-        if((lefttime>0) || (righttime>0)){
-
-            // Calculate RPM
-            int ppr = left_encoder.getPulsesPerRotation();
-            int ppr2 = right_encoder.getPulsesPerRotation();      // To work out how fast we are going we need to know how many pulses are in a complete rotation
-            float rpm = (60000000.0f/(ppr*lefttime));
-            float rpm2 =      (60000000.0f/(ppr2*righttime));          // 60000000us = 60secs
-            
-            // Calculate error term
-            float err = target_rpm-rpm;
-            float err2 = target_rpm-rpm2;
-
-            if(target_rpm==0.0f){           // Is the target 0 rpm?...
-                Wheel.Speed(0.0f,0.0f);     // If so stop the motors 
-            }
-            // Otherwise increase or decrease PWM if we are going too fast or slow
-            else{
-                if(rpm < target_rpm){
-                    Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()+pwm_increment);
-                }
-                else if(rpm > target_rpm){
-                    Wheel.Speed(Wheel.getSpeedRight(),Wheel.getSpeedLeft()-pwm_increment);
-                }
-            }  
-
-            //Update value for printing
-            
-        }
- 
-        // Check to see if the wheel IS stationary
-        else if(righttime==-2){
-            //Update value for printing
-            last_rpm = 0.0f;        
-
-            // SHOULD the wheel be stationary? 
-            if(target_rpm !=0.0f){
-                Wheel.Speed(0.0f,Wheel.getSpeedLeft()+pwm_increment);   // If not increase the power to turn the wheel
-                                                                        // (This serves to start the motor if it is not yet turning)
-            }
-            else{
-                Wheel.Speed(0.0f,0.0f);                                 //If so, ensure the motor is stopped
-            }
-        }
-        /////////////////// RIGHT ///////////////////
-        int32_t time = left_encoder.getLastPulseTimeUs();
-        int32_t time2 = right_encoder.getLastPulseTimeUs();
-        // If a pulse has been received..
-        if((time>0) || (time2>0)){
-
-            // Calculate RPM
-            int ppr = left_encoder.getPulsesPerRotation();
-            int ppr2 = right_encoder.getPulsesPerRotation();      // To work out how fast we are going we need to know how many pulses are in a complete rotation
-            float rpm = (60000000.0f/(ppr*time));
-            float rpm2 =      (60000000.0f/(ppr2*time2));          // 60000000us = 60secs
-            
-            // Calculate error term
-            float err = target_rpm-rpm;
-            float err2 = target_rpm-rpm2;
-
-            if(target_rpm==0.0f){           // Is the target 0 rpm?...
-                Wheel.Speed(0.0f,0.0f);     // If so stop the motors 
-            }
-            // Otherwise increase or decrease PWM if we are going too fast or slow
-            else{
-                if(rpm < target_rpm){
-                    Wheel.Speed(Wheel.getSpeedRight()+pwm_increment,Wheel.getSpeedLeft());
-                }
-                else if(rpm > target_rpm){
-                    Wheel.Speed(Wheel.getSpeedRight()-pwm_increment,Wheel.getSpeedLeft());
-                }
-            }  
-
-            //Update value for printing
-            
-        }
- 
-       
-        
-        
-        
-        } 
-    }
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
