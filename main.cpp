@@ -202,7 +202,7 @@ int main ()
 
     // Wait for the blue button to be pressed
     printf("Press Blue Button To Begin\n\r");
-    while (myButton == 0){greenLED = !greenLED; ThisThread::sleep_for(100ms);}
+    while (myButton == 0){greenLED = !greenLED; ThisThread::sleep_for(100ms);}  //if button is not pressed flash Green LED
 
     // Start the encoders
     left_encoder.start();
@@ -215,14 +215,14 @@ int main ()
     
     //new_test();
 
-   Buzz(int (1));
+   Buzz(int (1));  //after button is pressed buzz and run code 1
 
    code_sec= 1;
 
 
    wait_us(1500000);
 
-   if (myButton==1)
+   if (myButton==1) //If button is held for 2 buzzes run code 2
     { 
         Buzz(int (1));
 
@@ -230,7 +230,7 @@ int main ()
        
         wait_us(1500000);
 
-        if (myButton==1)
+        if (myButton==1) //if button is held for 3 buzzes run code 3
         {
 
             Buzz(int (1));
@@ -239,7 +239,7 @@ int main ()
 
             wait_us(1500000);
 
-            if (myButton==1)
+            if (myButton==1) //if button is held for 4 buzzes run code 4
             {
                 Buzz(int (1));
 
