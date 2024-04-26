@@ -110,7 +110,6 @@ void Megalovania(int s){
     wait_us(500000);
     Tune(buzzer,1e6/C4,s*2);
     wait_us(500000);
-    buzzer.period_ms(TIME_PERIOD);
     Tune(buzzer,1e6/D5,s*2);
     wait_us(250000);
     Tune(buzzer,1e6/A4,s*2);
@@ -119,7 +118,7 @@ void Megalovania(int s){
     wait_us(150000);
     Tune(buzzer,1e6/G4,s*2);
     wait_us(250000);
-Tune(buzzer,1e6/F4,s*2);
+    Tune(buzzer,1e6/F4,s*2);
     wait_us(250000);
     Tune(buzzer,1e6/D4,s*2);
     wait_us(150000);
@@ -153,6 +152,7 @@ Tune(buzzer,1e6/F4,s*2);
     wait_us(500000);
     Tune(buzzer,1e6/B3,s*2);
     wait_us(500000);
+    buzzer.period_ms(TIME_PERIOD);
 }
 void Buzz(int s){
     Tune(buzzer,1e6/C3,s*2);
